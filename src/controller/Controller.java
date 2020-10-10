@@ -16,7 +16,7 @@ public class Controller {
 	
 	public void drawController() {
 		
-		logica.drawLogica(app);
+		logica.draw(app);
 		
 	}
 	

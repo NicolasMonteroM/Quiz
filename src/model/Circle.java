@@ -4,22 +4,17 @@ import processing.core.PApplet;
 
 public class Circle extends Figure{
 	
-	public Circle(int size, float x, float y,  int dir, PApplet app) {
+	public Circle(int size, int x, int y,  int dir, PApplet app) {
 		
 		super(size, x, y, dir, app);
 		
 	}
 	
 	@Override
-	public void drawFigure() {
+	public void draw() {
 		
-	//	getApp().ellipse(this.x, this.y, this.size, this.size);
-		
-	}
-	
-	@Override
-	public void moveFigure(float dir){
-		
+		app.noStroke();
+		super.app.ellipse(this.x, this.y, this.size, this.size);
 		
 	}
 	

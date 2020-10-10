@@ -12,12 +12,17 @@ public class Logica {
 	
 	Square s;
 	Circle c;
+	
+	Figure f;
 
 	public Logica(PApplet app) {
 
+		this.app = app;
 		figures = new ArrayList<Figure>();
 		info = app.loadStrings("data/figuresData.txt");
 		firstFigures();
+		
+		System.out.println(figures);
 
 	}
 
@@ -34,8 +39,15 @@ public class Logica {
 				int y = Integer.parseInt(buildingInfo[3]);
 				int dir = Integer.parseInt(buildingInfo[4]);
 				
-				Square s = new Square(size, x, y, dir, app);
-				figures.add(s);
+			/*	System.out.println(size);
+				System.out.println(x);
+				System.out.println(y);
+				System.out.println(dir);*/
+				
+				
+				f = new Square(size, x, y, dir, app);
+				figures.add(f);
+				f.setDir(dir);
 				
 			} else if (buildingInfo[0].equals("Circulo")) {
 				
@@ -44,18 +56,28 @@ public class Logica {
 				int y = Integer.parseInt(buildingInfo[3]);
 				int dir = Integer.parseInt(buildingInfo[4]);
 				
-				Circle c = new Circle(size, x, y, dir, app);
-				figures.add(c);
+				/*	System.out.println(size);
+				System.out.println(x);
+				System.out.println(y);
+				System.out.println(dir);*/
+				
+				f = new Circle(size, x, y, dir, app);
+				figures.add(f);
+				f.setDir(dir);
+				
 			}
 		}
 
 	}
 
-	public void drawLogica(PApplet app) {
+	public void draw(PApplet app) {
 		
-		for (int i = 0; i < figures.size(); i++) {
-			figures.get(i).drawFigure();
-			}
+		for (Figure f : figures) {
+			
+			f.colourSelection();
+			f.draw();
+			f.moveFigure();
+		}
 
 	}
 

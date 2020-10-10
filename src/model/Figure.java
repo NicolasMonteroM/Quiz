@@ -4,27 +4,29 @@ import processing.core.PApplet;
 
 public abstract class Figure {
 
-	public float x;
-	public float y;
-	public float size;
-	public float dir;
+	public int x;
+	public int y;
+	public int size;
+	public int dir;
 	public PApplet app;
-	
-	public Figure(int size, float x, float y,  int dir, PApplet app) {
-		
+	public int figureColour;
+
+	public Figure(int size, int x, int y, int dir, PApplet app) {
+
 		this.y = y;
 		this.x = x;
 		this.size = size;
-		this.dir = dir;
+		this.dir = (int) app.random(-1, 1);
 		this.setApp(app);
-		
+		this.figureColour = (int) app.random(0, 6);
+
 	}
-	
+
 	public float getX() {
 		return x;
 	}
 
-	public void setX(float x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 
@@ -32,7 +34,7 @@ public abstract class Figure {
 		return y;
 	}
 
-	public void setY(float y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -40,7 +42,7 @@ public abstract class Figure {
 		return size;
 	}
 
-	public void setSize(float size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 
@@ -48,21 +50,67 @@ public abstract class Figure {
 		return dir;
 	}
 
-	public void setDir(float dir) {
+	public void setDir(int dir) {
 		this.dir = dir;
 	}
 
-	public void drawFigure(){
-		
-		
+	public void draw() {
+
 	}
-	
-	public void moveFigure(float dir){
-		
-		//this.y += dir;
-			
+
+	public void colourSelection() {
+
+		switch (figureColour) {
+
+		case 0:
+
+			app.fill(153, 72, 254);
+			break;
+
+		case 1:
+
+			app.fill(107, 221, 83);
+			break;
+
+		case 2:
+
+			app.fill(252, 139, 37);
+			break;
+
+		case 3:
+
+			app.fill(255, 199, 46);
+			break;
+
+		case 4:
+			app.fill(0, 180, 253);
+			break;
+
+		case 5:
+
+			app.fill(229, 45, 59);
+			break;
+		}
+
 	}
-	
+
+	public void moveFigure() {
+
+		this.y += dir;
+
+		if (this.y < 0 - this.size && dir == -1) {
+
+			setY(app.height);
+
+		}
+
+		if (this.y > app.height + this.size && dir == +1) {
+
+			setY(0 - this.size);
+
+		}
+
+	}
 
 	public PApplet getApp() {
 		return app;
