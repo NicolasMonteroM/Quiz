@@ -17,6 +17,8 @@ public class Square extends Figure{
 		app.noStroke();
 		super.app.rect(super.x, super.y, super.size, super.size);
 		
+		moveFigure();
+		
 	}
 
 }

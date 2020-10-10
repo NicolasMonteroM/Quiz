@@ -77,7 +77,25 @@ public class Logica {
 
 			f.colourSelection();
 			f.draw();
-			f.moveFigure(movementState);
+			//f.moveFigure();
+		}
+
+	}
+
+	public void collition() {
+
+		for (Figure f : figures) {
+
+			for (Figure s : figures) {
+
+				if (app.dist(s.getX(), s.getY(), f.getX(), f.getY()) < f.getSize() + 20) {
+
+					f.setDir((int) (f.getDir()*-1));
+					s.setDir((int) (f.getDir()*-1));
+
+				}
+
+			}
 		}
 
 	}
@@ -93,6 +111,27 @@ public class Logica {
 			}
 
 		}
+		
+		int type = (int) app.random(0, 2);
+
+		//random variable that throws the figures' size number
+		int z = ((int)app.random(5,60));
+		
+		switch(type) {
+		
+		  case 0:
+			  
+			  f = new Square((int)app.random(30, 80), (int)app.random(40, 560), (int)app.random(40, 560), 1, app);
+			  break;
+
+		  case 1:
+			  
+			  f = new Circle((int)app.random(30, 80), (int)app.random(40, 560), (int)app.random(40, 560), 1, app);
+			  break;
+			  
+		}
+		
+		figures.add(f);
 
 	}
 

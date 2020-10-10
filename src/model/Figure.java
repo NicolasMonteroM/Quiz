@@ -18,7 +18,7 @@ public abstract class Figure {
 		this.x = x;
 		this.size = size;
 		this.state = true;
-		this.dir = (int) app.random(-1, 1);
+		this.dir = dir;
 		this.setApp(app);
 		this.figureColour = (int) app.random(0, 6);
 
@@ -96,27 +96,19 @@ public abstract class Figure {
 
 	}
 
-	public void moveFigure(boolean state) {
+	public void moveFigure() {
 
 		this.y += dir;
 
-		if (!this.state) {
+		if (this.y < 0 - this.size && dir == -1) {
 
-			dir = 0;
+			setY(app.height);
 
-		} else {
+		}
 
-			if (this.y < 0 - this.size && dir == -1) {
+		if (this.y > app.height + this.size && dir == +1) {
 
-				setY(app.height);
-
-			}
-
-			if (this.y > app.height + this.size && dir == +1) {
-
-				setY(0 - this.size);
-
-			}
+			setY(0 - this.size);
 
 		}
 

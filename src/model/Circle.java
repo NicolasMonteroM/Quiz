@@ -16,6 +16,7 @@ public class Circle extends Figure{
 		app.noStroke();
 		super.app.ellipse(this.x, this.y, this.size, this.size);
 		
+		moveFigure();
 	}
 	
 }
