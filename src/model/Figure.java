@@ -10,14 +10,12 @@ public abstract class Figure {
 	public int dir;
 	public PApplet app;
 	public int figureColour;
-	public boolean state;
 
 	public Figure(int size, int x, int y, int dir, PApplet app) {
 
 		this.y = y;
 		this.x = x;
 		this.size = size;
-		this.state = true;
 		this.dir = dir;
 		this.setApp(app);
 		this.figureColour = (int) app.random(0, 6);
@@ -66,31 +64,31 @@ public abstract class Figure {
 
 		case 0:
 
-			app.fill(153, 72, 254);
+			app.fill(150, 150, 150);
 			break;
 
 		case 1:
 
-			app.fill(107, 221, 83);
+			app.fill(200, 200, 200);
 			break;
 
 		case 2:
 
-			app.fill(252, 139, 37);
+			app.fill(100, 100, 100);
 			break;
 
 		case 3:
 
-			app.fill(255, 199, 46);
+			app.fill(75, 75, 75);
 			break;
 
 		case 4:
-			app.fill(0, 180, 253);
+			app.fill(60, 60, 60);
 			break;
 
 		case 5:
 
-			app.fill(229, 45, 59);
+			app.fill(220, 220, 220);
 			break;
 		}
 

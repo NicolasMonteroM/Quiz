@@ -14,7 +14,7 @@ public class Square extends Figure{
 	public void draw() {
 		
 		app.rectMode(app.CENTER);
-		app.noStroke();
+		app.stroke(200);
 		super.app.rect(super.x, super.y, super.size, super.size);
 		
 		moveFigure();

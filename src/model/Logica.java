@@ -33,40 +33,26 @@ public class Logica {
 		for (int i = 0; i < info.length; i++) {
 
 			String[] buildingInfo = info[i].split(" ");
-
+			
+			int size = Integer.parseInt(buildingInfo[1]);
+			int x = Integer.parseInt(buildingInfo[2]);
+			int y = Integer.parseInt(buildingInfo[3]);
+			int dir = Integer.parseInt(buildingInfo[4]);
+			
 			if (buildingInfo[0].equals("Cuadrado")) {
 
-				int size = Integer.parseInt(buildingInfo[1]);
-				int x = Integer.parseInt(buildingInfo[2]);
-				int y = Integer.parseInt(buildingInfo[3]);
-				int dir = Integer.parseInt(buildingInfo[4]);
-
-				/*
-				 * System.out.println(size); System.out.println(x); System.out.println(y);
-				 * System.out.println(dir);
-				 */
-
 				f = new Square(size, x, y, dir, app);
-				figures.add(f);
-				f.setDir(dir);
 
-			} else if (buildingInfo[0].equals("Circulo")) {
-
-				int size = Integer.parseInt(buildingInfo[1]);
-				int x = Integer.parseInt(buildingInfo[2]);
-				int y = Integer.parseInt(buildingInfo[3]);
-				int dir = Integer.parseInt(buildingInfo[4]);
-
-				/*
-				 * System.out.println(size); System.out.println(x); System.out.println(y);
-				 * System.out.println(dir);
-				 */
+			} 
+			
+			if (buildingInfo[0].equals("Circulo")) {
 
 				f = new Circle(size, x, y, dir, app);
-				figures.add(f);
-				f.setDir(dir);
 
 			}
+			
+			figures.add(f);
+			f.setDir(dir);
 		}
 
 	}
@@ -77,62 +63,58 @@ public class Logica {
 
 			f.colourSelection();
 			f.draw();
-			//f.moveFigure();
+
 		}
 
 	}
 
-	public void collition() {
+	public void collision() {
 
-		for (Figure f : figures) {
+		/*for (Figure f : figures) {
 
-			for (Figure s : figures) {
+			if (app.dist(a.getX(), a.getY(), f.getY(), f.getY()) < s.getSize()) {
 
-				if (app.dist(s.getX(), s.getY(), f.getX(), f.getY()) < f.getSize() + 20) {
-
-					f.setDir((int) (f.getDir()*-1));
-					s.setDir((int) (f.getDir()*-1));
-
-				}
+				f.setDir(-1);
+				a.setDir(-1);
 
 			}
-		}
+
+		}*/
 
 	}
 
 	public void interactions() {
 
+		int type = (int) app.random(0, 2);
+
+		// random variable that throws the figures' size number
+		int z = ((int) app.random(5, 60));
+
+		switch (type) {
+
+		case 0:
+
+			f = new Square((int) app.random(30, 80), (int) app.random(40, 560), (int) app.random(40, 560), 1, app);
+			break;
+
+		case 1:
+
+			f = new Circle((int) app.random(30, 80), (int) app.random(40, 560), (int) app.random(40, 560), 1, app);
+			break;
+
+		}
+
+		figures.add(f);
+
 		for (Figure f : figures) {
 
-			if (app.dist(app.mouseX, app.mouseY, f.getX(), f.getY()) < f.getSize() + 20) {
+			if (app.dist(app.mouseX, app.mouseY, f.getX(), f.getY()) < f.getSize()) {
 
 				f.setDir(0);
 
 			}
 
 		}
-		
-		int type = (int) app.random(0, 2);
-
-		//random variable that throws the figures' size number
-		int z = ((int)app.random(5,60));
-		
-		switch(type) {
-		
-		  case 0:
-			  
-			  f = new Square((int)app.random(30, 80), (int)app.random(40, 560), (int)app.random(40, 560), 1, app);
-			  break;
-
-		  case 1:
-			  
-			  f = new Circle((int)app.random(30, 80), (int)app.random(40, 560), (int)app.random(40, 560), 1, app);
-			  break;
-			  
-		}
-		
-		figures.add(f);
-
 	}
 
 }

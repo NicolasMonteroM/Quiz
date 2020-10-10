@@ -13,7 +13,7 @@ public class Circle extends Figure{
 	@Override
 	public void draw() {
 		
-		app.noStroke();
+		app.stroke(200);
 		super.app.ellipse(this.x, this.y, this.size, this.size);
 		
 		moveFigure();
