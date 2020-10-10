@@ -13,7 +13,7 @@ public class Square extends Figure{
 	@Override
 	public void drawFigure() {
 		
-		this.app.rect(this.x, this.y, this.size, this.size);
+	//	this.app.rect(this.x, this.y, this.size, this.size);
 		
 	}
 	
