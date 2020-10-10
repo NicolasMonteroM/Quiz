@@ -9,11 +9,13 @@ public class Logica {
 	PApplet app;
 	public ArrayList<Figure> figures;
 	private String[] info;
-	
+
 	Square s;
 	Circle c;
-	
+
 	Figure f;
+
+	boolean movementState = true;
 
 	public Logica(PApplet app) {
 
@@ -21,8 +23,8 @@ public class Logica {
 		figures = new ArrayList<Figure>();
 		info = app.loadStrings("data/figuresData.txt");
 		firstFigures();
-		
-		System.out.println(figures);
+
+		// System.out.println(figures);
 
 	}
 
@@ -31,57 +33,66 @@ public class Logica {
 		for (int i = 0; i < info.length; i++) {
 
 			String[] buildingInfo = info[i].split(" ");
-			
+
 			if (buildingInfo[0].equals("Cuadrado")) {
-				
+
 				int size = Integer.parseInt(buildingInfo[1]);
 				int x = Integer.parseInt(buildingInfo[2]);
 				int y = Integer.parseInt(buildingInfo[3]);
 				int dir = Integer.parseInt(buildingInfo[4]);
-				
-			/*	System.out.println(size);
-				System.out.println(x);
-				System.out.println(y);
-				System.out.println(dir);*/
-				
-				
+
+				/*
+				 * System.out.println(size); System.out.println(x); System.out.println(y);
+				 * System.out.println(dir);
+				 */
+
 				f = new Square(size, x, y, dir, app);
 				figures.add(f);
 				f.setDir(dir);
-				
+
 			} else if (buildingInfo[0].equals("Circulo")) {
-				
+
 				int size = Integer.parseInt(buildingInfo[1]);
 				int x = Integer.parseInt(buildingInfo[2]);
 				int y = Integer.parseInt(buildingInfo[3]);
 				int dir = Integer.parseInt(buildingInfo[4]);
-				
-				/*	System.out.println(size);
-				System.out.println(x);
-				System.out.println(y);
-				System.out.println(dir);*/
-				
+
+				/*
+				 * System.out.println(size); System.out.println(x); System.out.println(y);
+				 * System.out.println(dir);
+				 */
+
 				f = new Circle(size, x, y, dir, app);
 				figures.add(f);
 				f.setDir(dir);
-				
+
 			}
 		}
 
 	}
 
-	public void draw(PApplet app) {
-		
+	public void draw() {
+
 		for (Figure f : figures) {
-			
+
 			f.colourSelection();
 			f.draw();
-			f.moveFigure();
+			f.moveFigure(movementState);
 		}
 
 	}
 
-	public void interactions(PApplet app) {
+	public void interactions() {
+
+		for (Figure f : figures) {
+
+			if (app.dist(app.mouseX, app.mouseY, f.getX(), f.getY()) < f.getSize() + 20) {
+
+				f.setDir(0);
+
+			}
+
+		}
 
 	}
 

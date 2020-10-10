@@ -16,13 +16,13 @@ public class Controller {
 	
 	public void drawController() {
 		
-		logica.draw(app);
+		logica.draw();
 		
 	}
 	
 	public void mouseController(){
 		
-		logica.interactions(app);
+		logica.interactions();
 		
 	}
 

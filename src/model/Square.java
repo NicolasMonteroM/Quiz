@@ -13,6 +13,7 @@ public class Square extends Figure{
 	@Override
 	public void draw() {
 		
+		app.rectMode(app.CENTER);
 		app.noStroke();
 		super.app.rect(super.x, super.y, super.size, super.size);
 		

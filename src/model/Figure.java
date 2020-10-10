@@ -10,12 +10,14 @@ public abstract class Figure {
 	public int dir;
 	public PApplet app;
 	public int figureColour;
+	public boolean state;
 
 	public Figure(int size, int x, int y, int dir, PApplet app) {
 
 		this.y = y;
 		this.x = x;
 		this.size = size;
+		this.state = true;
 		this.dir = (int) app.random(-1, 1);
 		this.setApp(app);
 		this.figureColour = (int) app.random(0, 6);
@@ -94,19 +96,27 @@ public abstract class Figure {
 
 	}
 
-	public void moveFigure() {
+	public void moveFigure(boolean state) {
 
 		this.y += dir;
 
-		if (this.y < 0 - this.size && dir == -1) {
+		if (!this.state) {
 
-			setY(app.height);
+			dir = 0;
 
-		}
+		} else {
 
-		if (this.y > app.height + this.size && dir == +1) {
+			if (this.y < 0 - this.size && dir == -1) {
 
-			setY(0 - this.size);
+				setY(app.height);
+
+			}
+
+			if (this.y > app.height + this.size && dir == +1) {
+
+				setY(0 - this.size);
+
+			}
 
 		}
 
