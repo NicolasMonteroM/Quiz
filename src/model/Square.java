@@ -2,9 +2,9 @@ package model;
 
 import processing.core.PApplet;
 
-public class Circle extends Figure{
-	
-	public Circle(int size, float x, float y,  int dir, PApplet app) {
+public class Square extends Figure{
+
+	public Square(int size, float x, float y,  int dir, PApplet app) {
 		
 		super(size, x, y, dir, app);
 		
@@ -13,7 +13,7 @@ public class Circle extends Figure{
 	@Override
 	public void drawFigure() {
 		
-	//	getApp().ellipse(this.x, this.y, this.size, this.size);
+		this.app.rect(this.x, this.y, this.size, this.size);
 		
 	}
 	
@@ -22,5 +22,5 @@ public class Circle extends Figure{
 		
 		
 	}
-	
+
 }
