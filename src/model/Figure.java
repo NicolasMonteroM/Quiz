@@ -57,7 +57,9 @@ public abstract class Figure {
 	public void draw() {
 
 	}
-
+	
+	// –––––––– RGB figure's colour selection ––––––––
+	
 	public void colourSelection() {
 
 		switch (figureColour) {
@@ -97,7 +99,9 @@ public abstract class Figure {
 	public void moveFigure() {
 
 		this.y += dir;
-
+		
+		// –––––––– Reappearing when getting to the top or bottom ––––––––
+		
 		if (this.y < 0 - this.size && dir == -1) {
 
 			setY(app.height);
@@ -109,7 +113,6 @@ public abstract class Figure {
 			setY(0 - this.size);
 
 		}
-
 	}
 
 	public PApplet getApp() {

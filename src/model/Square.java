@@ -1,6 +1,7 @@
 package model;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class Square extends Figure{
 
@@ -13,7 +14,7 @@ public class Square extends Figure{
 	@Override
 	public void draw() {
 		
-		app.rectMode(app.CENTER);
+		app.rectMode(PConstants.CENTER);
 		app.stroke(200);
 		super.app.rect(super.x, super.y, super.size, super.size);
 		

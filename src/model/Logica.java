@@ -1,17 +1,14 @@
 package model;
 
 import java.util.ArrayList;
-
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class Logica {
 
 	PApplet app;
 	public ArrayList<Figure> figures;
 	private String[] info;
-
-	Square s;
-	Circle c;
 
 	Figure f;
 
@@ -30,31 +27,32 @@ public class Logica {
 
 	public void firstFigures() {
 
+		// –––––––– creating  figures from array ––––––––
+		
 		for (int i = 0; i < info.length; i++) {
 
 			String[] buildingInfo = info[i].split(" ");
-			
+
 			int size = Integer.parseInt(buildingInfo[1]);
 			int x = Integer.parseInt(buildingInfo[2]);
 			int y = Integer.parseInt(buildingInfo[3]);
 			int dir = Integer.parseInt(buildingInfo[4]);
-			
+
 			if (buildingInfo[0].equals("Cuadrado")) {
 
 				f = new Square(size, x, y, dir, app);
 
-			} 
-			
+			}
+
 			if (buildingInfo[0].equals("Circulo")) {
 
 				f = new Circle(size, x, y, dir, app);
 
 			}
-			
+
 			figures.add(f);
 			f.setDir(dir);
 		}
-
 	}
 
 	public void draw() {
@@ -66,55 +64,94 @@ public class Logica {
 
 		}
 
+		collision();
 	}
 
 	public void collision() {
 
-		/*for (Figure f : figures) {
+		for (int i = 0; i < figures.size(); i++) {
+			for (int j = 0; j < figures.size(); j++) {
 
-			if (app.dist(a.getX(), a.getY(), f.getY(), f.getY()) < s.getSize()) {
+				// –––––––– calculating the distance between figures ––––––––
+				
+				float scope = (figures.get(i).getSize() - figures.get(j).getSize() + 15);
 
-				f.setDir(-1);
-				a.setDir(-1);
+				if (PApplet.dist(figures.get(i).getX(), figures.get(i).getY(), figures.get(j).getX(),
+						figures.get(j).getY()) < scope) {
 
+					// –––––––– changing directions ––––––––
+
+					figures.get(i).setDir((int) (figures.get(i).getDir() * -1));
+					figures.get(j).setDir((int) (figures.get(j).getDir() * -1));
+
+				}
 			}
-
-		}*/
-
+		}
 	}
 
 	public void interactions() {
 
-		int type = (int) app.random(0, 2);
+		if (app.mouseButton == PConstants.RIGHT) {
 
-		// random variable that throws the figures' size number
-		int z = ((int) app.random(5, 60));
+			// –––––––– random direction selector ––––––––
 
-		switch (type) {
+			int dir = 0;
+			int randomDir = (int) Math.floor(Math.random() * 2);
 
-		case 0:
+			switch (randomDir) {
 
-			f = new Square((int) app.random(30, 80), (int) app.random(40, 560), (int) app.random(40, 560), 1, app);
-			break;
+			case 0:
 
-		case 1:
+				dir = 1;
 
-			f = new Circle((int) app.random(30, 80), (int) app.random(40, 560), (int) app.random(40, 560), 1, app);
-			break;
+				break;
 
+			case 1:
+
+				dir = -1;
+
+				break;
+
+			}
+
+			// random variable that throws the figures' type
+			
+			int type = (int) app.random(0, 2);
+
+			// random variable that throws the figures' size number
+			
+			int z = ((int) app.random(30, 80));
+			
+			// random variables that throws the figures' position
+			
+			int x = (int) app.random(40, 560);
+			int y = (int) app.random(40, 560);
+
+			switch (type) {
+
+			case 0:
+
+				f = new Square(z, x, y, dir, app);
+				break;
+			case 1:
+
+				f = new Circle(z, x, y, dir, app);
+				break;
+
+			}
+
+			figures.add(f);
 		}
 
-		figures.add(f);
-
+		// stopping when clicking on figures
+		
 		for (Figure f : figures) {
 
-			if (app.dist(app.mouseX, app.mouseY, f.getX(), f.getY()) < f.getSize()) {
+			if (PApplet.dist(app.mouseX, app.mouseY, f.getX(), f.getY()) < f.getSize()) {
 
 				f.setDir(0);
 
 			}
-
 		}
 	}
-
 }
